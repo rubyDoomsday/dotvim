@@ -24,6 +24,9 @@ Plugin 'honza/vim-snippets'
 " " If you want :UltiSnipsEdit to split your window.
 " let g:UltiSnipsEditSplit="vertical"
 
+" Autosave feature
+Plugin 'git@github.com:vim-scripts/vim-auto-save.git'
+
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -60,9 +63,17 @@ colorscheme slate
 " My plugins from ./vim/bundle and ./vim/plugins
 execute pathogen#infect()
 
+"" vim-auto-save Settings
+let g:auto_save = 1  " enable AutoSave on Vim startup"
+let g:auto_save_in_insert_mode = 0  " do not save while in insert mode"
+
 "" Rubocop Settings
 let g:vimrubocop_config = '/Users/rebeccachapin/HealthBase/.rubocop.yml'
 let g:vimrubocop_keymap = 0
+
+"" Autoswitch abs/rel number scheme
+autocmd InsertEnter * :set number
+autocmd InsertLeave * :set relativenumber
 
 "" Syntastic Settings
 set statusline+=%#warningmsg#

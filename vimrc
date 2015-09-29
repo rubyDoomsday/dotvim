@@ -56,16 +56,20 @@ filetype plugin indent on    " required
 map <leader>bp :s/\(^.*\n\)/require 'pry'\rbinding.pry\r\1/g<cr>:noh<cr>3k==2.2j
 " clean up require 'pry' and binding.pry in file mapped to undo-binding-pry ubp
 map <leader>ubp :g/require 'pry'\_s\+binding.pry\_s\+/,+1d<cr>
+" map Silver Searcher
+map <leader>s :Ack --smart-case -w<space>
+" search for word under cursor with Silver Searcher
+map <leader>a :Ack --smart-case -w <C-r>=expand('<cword>')<CR>
 
 syntax on
-" My color scheme
-colorscheme slate
+
 " My plugins from ./vim/bundle and ./vim/plugins
 execute pathogen#infect()
 
 "" vim-auto-save Settings
 let g:auto_save = 1  " enable AutoSave on Vim startup"
 let g:auto_save_in_insert_mode = 0  " do not save while in insert mode"
+let g:auto_save_no_updatetime = 1  " do not change the 'updatetime' option"
 
 "" Rubocop Settings
 let g:vimrubocop_config = '/Users/rebeccachapin/HealthBase/.rubocop.yml'
@@ -80,7 +84,7 @@ set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
 
-let g:syntastic_always_populate_loc_list = 1
+" let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
@@ -89,7 +93,8 @@ let g:syntastic_loc_list_height = 2
 let g:syntastic_auto_loc_list = 0
 
 " My preferences
-set number
+colorscheme slate
+set relativenumber
 set tabstop=2
 set expandtab
 set shiftwidth=2

@@ -25,7 +25,7 @@ Plugin 'honza/vim-snippets'
 " let g:UltiSnipsEditSplit="vertical"
 
 " Autosave feature
-Plugin 'git@github.com:vim-scripts/vim-auto-save.git'
+" Plugin 'git@github.com:vim-scripts/vim-auto-save.git'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -60,6 +60,13 @@ map <leader>ubp :g/require 'pry'\_s\+binding.pry\_s\+/,+1d<cr>
 map <leader>s :Ack --smart-case -w<space>
 " search for word under cursor with Silver Searcher
 map <leader>a :Ack --smart-case -w <C-r>=expand('<cword>')<CR>
+map <Leader>r :%s/\<<C-r><C-w>\>/
+" paste contents from clipboard
+map <leader>p :r !pbpaste<CR><CR>
+" copy current line to clipboard
+map <leader>c :.w !pbcopy<CR><CR>
+" copy selected/highlighted lines to clipboard
+vmap <leader>c :w !pbcopy<CR><CR>
 
 syntax on
 
@@ -67,13 +74,16 @@ syntax on
 execute pathogen#infect()
 
 "" vim-auto-save Settings
-let g:auto_save = 1  " enable AutoSave on Vim startup"
-let g:auto_save_in_insert_mode = 0  " do not save while in insert mode"
-let g:auto_save_no_updatetime = 1  " do not change the 'updatetime' option"
+" let g:auto_save = 0  " enable AutoSave on Vim startup"
+" let g:auto_save_in_insert_mode = 0  " do not save while in insert mode"
+" let g:auto_save_no_updatetime = 1  " do not change the 'updatetime' option"
 
 "" Rubocop Settings
 let g:vimrubocop_config = '/Users/rebeccachapin/HealthBase/.rubocop.yml'
 let g:vimrubocop_keymap = 0
+
+"" Spellchecker (becuase me flail ingrish)
+"set spell spelllang=en_us
 
 "" Autoswitch abs/rel number scheme
 autocmd InsertEnter * :set number
@@ -86,24 +96,30 @@ set statusline+=%*
 
 " let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
+let g:syntastic_check_on_open = 0
+let g:syntastic_check_on_wq = 1
 let g:syntastic_ruby_checkers = ['rubocop']
 let g:syntastic_loc_list_height = 2
 let g:syntastic_auto_loc_list = 0
+let g:syntastic_error_symbol = "✗"
+let g:syntastic_warning_symbol = "⚠"
 
 " My preferences
-colorscheme slate
+colorscheme lucius
 set relativenumber
 set tabstop=2
 set expandtab
 set shiftwidth=2
 set hlsearch
 
+" color column settings 
+highlight ColorColumn ctermbg=235 
+let &colorcolumn="81,".join(range(101,999),",")
+
 " Settings for vim-indent-guides
 let g:indent_guides_auto_colors = 0
 let g:indent_guides_start_levl = 3
 let g:indent_guides_guide_size = 2
 let g:indent_guides_enable_on_vim_startup = 1
-autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd    ctermbg=232
-autocmd VimEnter,Colorscheme * :hi IndentGuidesEven   ctermbg=233
+autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd    ctermbg=236
+autocmd VimEnter,Colorscheme * :hi IndentGuidesEven   ctermbg=235

@@ -59,7 +59,7 @@ let g:vimrubocop_config = '/Users/rebeccachapin/HealthBase/.rubocop.yml'
 let g:vimrubocop_keymap = 0
 
 "" Spellchecker (becuase me flail ingrish)
-set spell spelllang=en_us
+"set spell spelllang=en_us
 
 "" Autoswitch abs/rel number scheme
 autocmd InsertEnter * :set number

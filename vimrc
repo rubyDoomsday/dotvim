@@ -8,49 +8,23 @@ call vundle#begin()
 
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
-
-" The following are examples of different formats supported.
 " Keep Plugin commands between vundle#begin/end.
-" plugin on GitHub repo
 Plugin 'tpope/vim-fugitive'
-" plugin from http://vim-scripts.org/vim/scripts.html
-
 " Track the engine.
 "Plugin 'SirVer/ultisnips'
-
-" " Snippets are separated from the engine. Add this if you want them:
-Plugin 'honza/vim-snippets'
-
-" " If you want :UltiSnipsEdit to split your window.
-" let g:UltiSnipsEditSplit="vertical"
-
-" Autosave feature
-" Plugin 'git@github.com:vim-scripts/vim-auto-save.git'
+" Snippets are separated from the engine. Add this if you want them:
+"Plugin 'honza/vim-snippets'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
-" To ignore plugin indent changes, instead use:
-"filetype plugin on
-"
 " Brief help
 " :PluginList       - lists configured plugins
 " :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
 " :PluginSearch foo - searches for foo; append `!` to refresh local cache
 " :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
 "
-" see :h vundle for more details or wiki for FAQ
-" Put your non-Plugin stuff after this line
 
-" " Trigger configuration. Do not use <tab> if you use
-" https://github.com/Valloric/YouCompleteMe.
-" let g:UltiSnipsExpandTrigger="<tab>"
-" let g:UltiSnipsJumpForwardTrigger="<c-b>"
-" let g:UltiSnipsJumpBackwardTrigger="<c-z>"
-"
-" " If you want :UltiSnipsEdit to split your window.
-" let g:UltiSnipsEditSplit="vertical"
-"
 " Homemade Shortcuts
 " add a require 'pry' and binding.pry at current cursor location
 map <leader>bp :s/\(^.*\n\)/require 'pry'\rbinding.pry\r\1/g<cr>:noh<cr>3k==2.2j
@@ -67,23 +41,25 @@ map <leader>p :r !pbpaste<CR><CR>
 map <leader>c :.w !pbcopy<CR><CR>
 " copy selected/highlighted lines to clipboard
 vmap <leader>c :w !pbcopy<CR><CR>
+" run current rspec file
+map <leader>t :!bundle exec rspec %:p<CR>
+map <leader>y :!bundle exec rspec -fd %:p<CR>
+" clear highlighting with space
+nnoremap <silent> <Space> :nohlsearch<Bar>:echo<CR>
+" toggle NERDTree
+map <leader>] :NERDTreeToggle<cr>
 
 syntax on
 
-" My plugins from ./vim/bundle and ./vim/plugins
+" Load Plugins from ./vim/bundle and ./vim/plugins
 execute pathogen#infect()
-
-"" vim-auto-save Settings
-" let g:auto_save = 0  " enable AutoSave on Vim startup"
-" let g:auto_save_in_insert_mode = 0  " do not save while in insert mode"
-" let g:auto_save_no_updatetime = 1  " do not change the 'updatetime' option"
 
 "" Rubocop Settings
 let g:vimrubocop_config = '/Users/rebeccachapin/HealthBase/.rubocop.yml'
 let g:vimrubocop_keymap = 0
 
 "" Spellchecker (becuase me flail ingrish)
-"set spell spelllang=en_us
+set spell spelllang=en_us
 
 "" Autoswitch abs/rel number scheme
 autocmd InsertEnter * :set number
@@ -111,6 +87,7 @@ set tabstop=2
 set expandtab
 set shiftwidth=2
 set hlsearch
+set backspace=2
 
 " color column settings 
 highlight ColorColumn ctermbg=235 

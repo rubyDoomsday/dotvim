@@ -2,10 +2,9 @@ set nocompatible              " be iMproved, required
 filetype off                  " required
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-" alternatively, pass a path where Vundle should install plugins
-"call vundle#begin('~/some/path/here')
+set tags=~/.tags
 
+call vundle#begin()
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
 " Keep Plugin commands between vundle#begin/end.
@@ -33,7 +32,7 @@ map <leader>ubp :g/require 'pry'\_s\+binding.pry\_s\+/,+1d<cr>
 " map Silver Searcher
 map <leader>s :Ack --smart-case -w<space>
 " search for word under cursor with Silver Searcher
-map <leader>a :Ack --smart-case -w <C-r>=expand('<cword>')<CR>
+map <leader>sw :Ack --smart-case --ruby -w <C-r>=expand('<cword>')<CR>
 map <Leader>r :%s/\<<C-r><C-w>\>/
 " paste contents from clipboard
 map <leader>p :r !pbpaste<CR><CR>
@@ -42,12 +41,36 @@ map <leader>c :.w !pbcopy<CR><CR>
 " copy selected/highlighted lines to clipboard
 vmap <leader>c :w !pbcopy<CR><CR>
 " run current rspec file
-map <leader>t :!bundle exec rspec %:p<CR>
-map <leader>y :!bundle exec rspec -fd %:p<CR>
+map <leader>t :wa<cr>:!bundle exec rspec %:p<CR>
+map <leader>tf :wa<cr>:!bundle exec rspec -fd %:p<CR>
 " clear highlighting with space
 nnoremap <silent> <Space> :nohlsearch<Bar>:echo<CR>
 " toggle NERDTree
 map <leader>] :NERDTreeToggle<cr>
+" toggle foldlevel
+map <leader>1 :set foldlevel=1<cr>
+map <leader>2 :set foldlevel=2<cr>
+map <leader>3 :set foldlevel=3<cr>
+map <leader>3 :set foldlevel=3<cr>
+map <leader>4 :set foldlevel=4<cr>
+map <leader>5 :set foldlevel=5<cr>
+map <leader>0 :set foldlevel=20<cr>
+" spell check on
+map <leader>sp :setlocal spell spelllang=en_us<CR>
+" spell check off
+map <leader>usp :set nospell<CR>
+
+" vimdiff shortcuts
+map <leader><left> :diffget LOCAL <bar> :diffu<cr>
+map <leader><right> :diffget REMOTE <bar> :diffu<cr>
+map <leader><up><up> :diffget BASE <bar> :diffu<cr>
+map <leader><up> [c
+map <leader><down> ]c
+map <leader>do :diffoff<cr>
+map <leader>dt :diffthis<cr>
+
+" remove trailing white space before save
+autocmd BufWritePre * :%s/\s\+$//e
 
 syntax on
 
@@ -88,9 +111,11 @@ set expandtab
 set shiftwidth=2
 set hlsearch
 set backspace=2
+set foldmethod=indent
+set foldlevel=20
 
-" color column settings 
-highlight ColorColumn ctermbg=235 
+" color column settings
+highlight ColorColumn ctermbg=235
 let &colorcolumn="81,".join(range(101,999),",")
 
 " Settings for vim-indent-guides

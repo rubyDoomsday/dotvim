@@ -40,9 +40,6 @@ map <leader>p :r !pbpaste<CR><CR>
 map <leader>c :.w !pbcopy<CR><CR>
 " copy selected/highlighted lines to clipboard
 vmap <leader>c :w !pbcopy<CR><CR>
-" run current rspec file
-map <leader>t :wa<cr>:!bundle exec rspec %:p<CR>
-map <leader>tf :wa<cr>:!bundle exec rspec -fd %:p<CR>
 " clear highlighting with space
 nnoremap <silent> <Space> :nohlsearch<Bar>:echo<CR>
 " toggle NERDTree
@@ -60,14 +57,32 @@ map <leader>sp :setlocal spell spelllang=en_us<CR>
 " spell check off
 map <leader>usp :set nospell<CR>
 
-" vimdiff shortcuts
-map <leader><left> :diffget LOCAL <bar> :diffu<cr>
-map <leader><right> :diffget REMOTE <bar> :diffu<cr>
-map <leader><up><up> :diffget BASE <bar> :diffu<cr>
-map <leader><up> [c
-map <leader><down> ]c
-map <leader>do :diffoff<cr>
-map <leader>dt :diffthis<cr>
+if &diff
+  " vimdiff shortcuts
+  map <leader><left> :diffget LOCAL <bar> :diffu<cr>
+  map <leader><right> :diffget REMOTE <bar> :diffu<cr>
+  map <leader><up><up> :diffget BASE <bar> :diffu<cr>
+  map <leader><up> [c
+  map <leader><down> ]c
+  map <leader>do :diffoff<cr>
+  map <leader>dt :diffthis<cr>
+else
+  " spellcheck navigation
+  map <leader><up> [s
+  map <leader><down> ]s
+endif
+
+" rspec shortcuts
+" run current rspec file
+map <leader>t :wa<cr>:!bundle exec rspec %:p<CR>
+" run current rspec file from current line
+map <leader>tr :wa<cr>:call RunSpecAtLine()<CR>
+" builds rspec command from current line
+function! RunSpecAtLine()
+  let currentFile = @%
+  let specCommand = "!bundle exec rspec -fd "
+  execute specCommand . currentFile . ":" . line(".")
+endfunction
 
 " remove trailing white space before save
 autocmd BufWritePre * :%s/\s\+$//e

@@ -56,7 +56,13 @@ map <leader>0 :set foldlevel=20<cr>
 map <leader>sp :setlocal spell spelllang=en_us<CR>
 " spell check off
 map <leader>usp :set nospell<CR>
-
+" zg = add good word
+" z= = suggest correction
+" zw = add bad word
+" Tabulariz only the first instance of :
+map <leader>-: :Tabularize /^[^:]*:\zs<cr>
+map <leader>-= :Tabularize /^[^=]*<cr>
+map <leader>-, :Tabularize /^[^,]*,\zs<cr>
 if &diff
   " vimdiff shortcuts
   map <leader><left> :diffget LOCAL <bar> :diffu<cr>
@@ -108,15 +114,28 @@ set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
 
+" Syntastic Preferences
 " let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 0
-let g:syntastic_check_on_wq = 1
-let g:syntastic_ruby_checkers = ['rubocop']
-let g:syntastic_loc_list_height = 2
-let g:syntastic_auto_loc_list = 0
-let g:syntastic_error_symbol = "✗"
-let g:syntastic_warning_symbol = "⚠"
+let g:syntastic_auto_loc_list    = 1
+let g:syntastic_check_on_open    = 0
+let g:syntastic_check_on_wq      = 1
+let g:syntastic_ruby_checkers    = ['rubocop']
+let g:syntastic_loc_list_height  = 2
+let g:syntastic_auto_loc_list    = 0
+let g:syntastic_error_symbol     = "✗"
+let g:syntastic_warning_symbol   = "⚠"
+
+" vim-go Preferences
+let g:go_highlight_functions  = 1
+let g:go_highlight_methods    = 1
+let g:go_highlight_types      = 1
+
+" Vim-Markdown preferences
+let markdown_enable_spell_checking  = 0
+let vim_markdown_preview_github     =1
+let vim_markdown_preview_browser    ='Google Chrome'
+let vim_markdown_preview_hotkey     ='<C-m>'
+let vim_markdown_preview_toggle     =1
 
 " My preferences
 colorscheme lucius
@@ -134,9 +153,9 @@ highlight ColorColumn ctermbg=235
 let &colorcolumn="81,".join(range(101,999),",")
 
 " Settings for vim-indent-guides
-let g:indent_guides_auto_colors = 0
-let g:indent_guides_start_levl = 3
-let g:indent_guides_guide_size = 2
-let g:indent_guides_enable_on_vim_startup = 1
+let g:indent_guides_auto_colors            = 0
+let g:indent_guides_start_levl             = 3
+let g:indent_guides_guide_size             = 2
+let g:indent_guides_enable_on_vim_startup  = 1
 autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd    ctermbg=236
 autocmd VimEnter,Colorscheme * :hi IndentGuidesEven   ctermbg=235

@@ -1,11 +1,4 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =9
-let g:netrw_dirhist_1='/Users/rebeccachapin/.vim/colors'
-let g:netrw_dirhist_2='/Users/rebeccachapin/.vim'
-let g:netrw_dirhist_3='/Users/rebeccachapin/.vim/bundle'
-let g:netrw_dirhist_4='/Users/rebeccachapin/.vim/bundle/Vundle.vim'
-let g:netrw_dirhist_5='/Users/rebeccachapin/connect_portal/spec/factories'
-let g:netrw_dirhist_6='/Users/rebeccachapin/connect_portal/spec/lib'
-let g:netrw_dirhist_7='/Users/rebeccachapin/connect_portal/spec/lib/partner_testing'
-let g:netrw_dirhist_8='/Users/rebeccachapin/HealthBase/spec/engines/connect/controllers/api/v1'
-let g:netrw_dirhist_9='/Users/rebeccachapin/HealthBase/spec/engines/connect/controllers/api/v1/users'
+let g:netrw_dirhist_cnt =2
+let g:netrw_dirhist_1='/Users/rebeccachapin/.rbenv/versions/2.3.1/lib/ruby/gems/2.3.0/gems/oauth-0.4.7'
+let g:netrw_dirhist_2='/Users/rebeccachapin/.rbenv/versions/2.3.1/lib/ruby/gems/2.3.0/gems/rubocop-0.40.0'

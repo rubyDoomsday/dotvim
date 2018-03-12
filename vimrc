@@ -2,7 +2,8 @@ set nocompatible              " be iMproved, required
 filetype off                  " required
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
-set tags=~/.tags
+set tags=tags;/
+set lazyredraw
 
 call vundle#begin()
 " let Vundle manage Vundle, required
@@ -10,9 +11,10 @@ Plugin 'VundleVim/Vundle.vim'
 " Keep Plugin commands between vundle#begin/end.
 Plugin 'tpope/vim-fugitive'
 " Track the engine.
-"Plugin 'SirVer/ultisnips'
+" Plugin 'SirVer/ultisnips'
 " Snippets are separated from the engine. Add this if you want them:
-"Plugin 'honza/vim-snippets'
+" Plugin 'honza/vim-snippets'
+Plugin 'nsf/gocode', {'rtp': 'vim/'}
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -82,12 +84,15 @@ endif
 " run current rspec file
 map <leader>t :wa<cr>:!bundle exec rspec %:p<CR>
 " run current rspec file from current line
-map <leader>tr :wa<cr>:call RunSpecAtLine()<CR>
+map <leader>tr :wa<cr>:call RunSpecAtLine("!bundle exec rspec -fd ")<CR>
+" run current rspec file
+map <leader>st :wa<cr>:!script/test %:p<CR>
+" run current rspec file from current line
+map <leader>str :wa<cr>:call RunSpecAtLine("!script/test -fd ")<CR>
 " builds rspec command from current line
-function! RunSpecAtLine()
+function! RunSpecAtLine(specCommand)
   let currentFile = @%
-  let specCommand = "!bundle exec rspec -fd "
-  execute specCommand . currentFile . ":" . line(".")
+  execute a:specCommand . currentFile . ":" . line(".")
 endfunction
 
 " remove trailing white space before save
@@ -129,6 +134,7 @@ let g:syntastic_warning_symbol   = "⚠"
 let g:go_highlight_functions  = 1
 let g:go_highlight_methods    = 1
 let g:go_highlight_types      = 1
+let g:go_fmt_command = "goimports"
 
 " Vim-Markdown preferences
 let markdown_enable_spell_checking  = 0

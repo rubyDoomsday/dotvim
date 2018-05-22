@@ -95,6 +95,7 @@ function! RunSpecAtLine(specCommand)
   execute a:specCommand . currentFile . ":" . line(".")
 endfunction
 
+
 " remove trailing white space before save
 autocmd BufWritePre * :%s/\s\+$//e
 
@@ -165,3 +166,5 @@ let g:indent_guides_guide_size             = 2
 let g:indent_guides_enable_on_vim_startup  = 1
 autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd    ctermbg=236
 autocmd VimEnter,Colorscheme * :hi IndentGuidesEven   ctermbg=235
+
+" let NERDTreeShowHidden=1

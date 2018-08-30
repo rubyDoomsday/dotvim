@@ -31,6 +31,10 @@ filetype plugin indent on    " required
 map <leader>bp :s/\(^.*\n\)/require 'pry'\rbinding.pry\r\1/g<cr>:noh<cr>3k==2.2j
 " clean up require 'pry' and binding.pry in file mapped to undo-binding-pry ubp
 map <leader>ubp :g/require 'pry'\_s\+binding.pry\_s\+/,+1d<cr>
+" add a require 'remote-pry' and binding.pry at current cursor location
+map <leader>rbp :s/\(^.*\n\)/require 'pry-remote'\rbinding.remote_pry\r\1/g<cr>:noh<cr>3k==2.2j
+" clean up require 'pry' and binding.pry in file mapped to undo-binding-pry ubp
+map <leader>urbp :g/require 'pry-remote'\_s\+binding.remote_pry\_s\+/,+1d<cr>
 " map Silver Searcher
 map <leader>s :Ack --smart-case -w<space>
 " search for word under cursor with Silver Searcher
@@ -139,10 +143,10 @@ let g:go_fmt_command = "goimports"
 
 " Vim-Markdown preferences
 let markdown_enable_spell_checking  = 0
-let vim_markdown_preview_github     =1
-let vim_markdown_preview_browser    ='Google Chrome'
-let vim_markdown_preview_hotkey     ='<C-m>'
-let vim_markdown_preview_toggle     =1
+let vim_markdown_preview_github     = 1
+let vim_markdown_preview_browser    = 'Google Chrome'
+" let vim_markdown_preview_hotkey     = '<C-m>'
+let vim_markdown_preview_toggle     = 1
 
 " My preferences
 colorscheme lucius

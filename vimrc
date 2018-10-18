@@ -1,3 +1,7 @@
+if has('python3')
+  silent! python3 1
+endif
+
 set nocompatible              " be iMproved, required
 filetype off                  " required
 " set the runtime path to include Vundle and initialize
@@ -90,15 +94,19 @@ map <leader>t :wa<cr>:!bundle exec rspec %:p<CR>
 " run current rspec file from current line
 map <leader>tr :wa<cr>:call RunSpecAtLine("!bundle exec rspec -fd ")<CR>
 " run current rspec file
-map <leader>st :wa<cr>:!script/test %:p<CR>
+map <leader>st :wa<cr>:call RunSpecForFile("!script/test ")<CR>
 " run current rspec file from current line
-map <leader>str :wa<cr>:call RunSpecAtLine("!script/test -fd ")<CR>
+map <leader>str :wa<cr>:call RunSpecAtLine("!script/test ")<CR>
 " builds rspec command from current line
 function! RunSpecAtLine(specCommand)
   let currentFile = @%
   execute a:specCommand . currentFile . ":" . line(".")
 endfunction
 
+function! RunSpecForFile(specCommand)
+  let currentFile = @%
+  execute a:specCommand . currentFile
+endfunction
 
 " remove trailing white space before save
 autocmd BufWritePre * :%s/\s\+$//e
@@ -106,6 +114,10 @@ autocmd BufWritePre * :%s/\s\+$//e
 syntax on
 
 " Load Plugins from ./vim/bundle and ./vim/plugins
+let g:pathogen_disabled = []
+" call add(g:pathogen_disabled, 'tabular')
+" call add(g:pathogen_disabled, 'syntastic')
+call add(g:pathogen_disabled, 'vim-markdown')
 execute pathogen#infect()
 
 "" Rubocop Settings
@@ -170,5 +182,17 @@ let g:indent_guides_guide_size             = 2
 let g:indent_guides_enable_on_vim_startup  = 1
 autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd    ctermbg=236
 autocmd VimEnter,Colorscheme * :hi IndentGuidesEven   ctermbg=235
+
+" Javacomplete
+autocmd FileType java setlocal omnifunc=javacomplete#Complete
+nmap <F4> <Plug>(JavaComplete-Imports-AddSmart)
+imap <F4> <Plug>(JavaComplete-Imports-AddSmart)
+nmap <F6> <Plug>(JavaComplete-Imports-AddMissing)
+imap <F6> <Plug>(JavaComplete-Imports-AddMissing)
+nmap <F7> <Plug>(JavaComplete-Imports-RemoveUnused)
+imap <F7> <Plug>(JavaComplete-Imports-RemoveUnused)
+" let g:JavaComplete_LibsPath
+" let g:JavaComplete_SourcesPath
+
 
 " let NERDTreeShowHidden=1

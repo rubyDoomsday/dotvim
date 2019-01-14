@@ -196,3 +196,4 @@ imap <F7> <Plug>(JavaComplete-Imports-RemoveUnused)
 
 
 " let NERDTreeShowHidden=1
+set term=screen-256color

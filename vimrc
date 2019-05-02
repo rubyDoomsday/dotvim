@@ -13,12 +13,34 @@ call vundle#begin()
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
 " Keep Plugin commands between vundle#begin/end.
+Plugin 'mileszs/ack.vim'
+Plugin 'kien/ctrlp.vim'
+Plugin 'Raimondi/delimitMate'
+Plugin 'scrooloose/nerdtree'
+Plugin 'vim-scripts/Syntastic'
+Plugin 'godlygeek/tabular'
+Plugin 'tomtom/tcomment_vim'
+Plugin 'nathanaelkane/vim-indent-guides'
+Plugin 'honza/vim-snippets'
+Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-fugitive'
-" Track the engine.
-" Plugin 'SirVer/ultisnips'
-" Snippets are separated from the engine. Add this if you want them:
-" Plugin 'honza/vim-snippets'
+Plugin 'plasticboy/vim-markdown'
+Plugin 'JamshedVesuna/vim-markdown-preview'
 Plugin 'nsf/gocode', {'rtp': 'vim/'}
+Plugin 'Lokaltog/vim-powerline'
+Plugin 'SirVer/ultisnips'
+Plugin 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
+
+" React plugins
+Plugin 'leafgarland/typescript-vim'
+Plugin 'peitalin/vim-jsx-typescript'
+Plugin 'mattn/webapi-vim'
+Plugin 'mattn/emmet-vim'
+Plugin 'Shougo/vimproc.vim'
+" Plugin 'Shougo/vimshell.vim'
+" Plugin 'sebdah/vim-delve'
+Plugin 'Quramy/tsuquyomi'
+Plugin 'prettier/vim-prettier', { 'do': 'yarn install' }
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -28,7 +50,14 @@ filetype plugin indent on    " required
 " :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
 " :PluginSearch foo - searches for foo; append `!` to refresh local cache
 " :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
-"
+
+" Load Plugins from ./vim/bundle and ./vim/plugins
+" let g:pathogen_disabled = []
+" call add(g:pathogen_disabled, 'tabular')
+" call add(g:pathogen_disabled, 'syntastic')
+" call add(g:pathogen_disabled, 'vim-markdown')
+execute pathogen#infect()
+
 
 " Homemade Shortcuts
 " add a require 'pry' and binding.pry at current cursor location
@@ -39,10 +68,11 @@ map <leader>ubp :g/require 'pry'\_s\+binding.pry\_s\+/,+1d<cr>
 map <leader>rbp :s/\(^.*\n\)/require 'pry-remote'\rbinding.remote_pry\r\1/g<cr>:noh<cr>3k==2.2j
 " clean up require 'pry' and binding.pry in file mapped to undo-binding-pry ubp
 map <leader>urbp :g/require 'pry-remote'\_s\+binding.remote_pry\_s\+/,+1d<cr>
-" map Silver Searcher
-map <leader>s :Ack --smart-case -w<space>
 " search for word under cursor with Silver Searcher
-map <leader>sw :Ack --smart-case --ruby -w <C-r>=expand('<cword>')<CR>
+map <leader>sw :Ack --smart-case -w<space>
+" search for word under cursor with Silver Searcher (Ruby)
+map <leader>swr :Ack --smart-case --ruby -w <C-r>=expand('<cword>')<CR>
+" replace word under cusor
 map <Leader>r :%s/\<<C-r><C-w>\>/
 " paste contents from clipboard
 map <leader>p :r !pbpaste<CR><CR>
@@ -113,13 +143,6 @@ autocmd BufWritePre * :%s/\s\+$//e
 
 syntax on
 
-" Load Plugins from ./vim/bundle and ./vim/plugins
-let g:pathogen_disabled = []
-" call add(g:pathogen_disabled, 'tabular')
-" call add(g:pathogen_disabled, 'syntastic')
-call add(g:pathogen_disabled, 'vim-markdown')
-execute pathogen#infect()
-
 "" Rubocop Settings
 let g:vimrubocop_config = '/Users/rebeccachapin/HealthBase/.rubocop.yml'
 let g:vimrubocop_keymap = 0
@@ -138,14 +161,18 @@ set statusline+=%*
 
 " Syntastic Preferences
 " let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list    = 1
-let g:syntastic_check_on_open    = 0
-let g:syntastic_check_on_wq      = 1
-let g:syntastic_ruby_checkers    = ['rubocop']
-let g:syntastic_loc_list_height  = 2
-let g:syntastic_auto_loc_list    = 0
-let g:syntastic_error_symbol     = "✗"
-let g:syntastic_warning_symbol   = "⚠"
+let g:syntastic_auto_loc_list       = 1
+let g:syntastic_check_on_open       = 0
+let g:syntastic_check_on_wq         = 1
+let g:syntastic_ruby_checkers       = ['rubocop']
+let g:syntastic_typescript_checkers = ['tsuquyomi']
+let g:syntastic_loc_list_height     = 2
+let g:syntastic_auto_loc_list       = 0
+let g:syntastic_error_symbol        = "✗"
+let g:syntastic_warning_symbol      = "⚠"
+
+" Tsuquyomi preferences
+let g:tsuquyomi_disable_quickfix = 1
 
 " vim-go Preferences
 let g:go_highlight_functions  = 1
@@ -160,6 +187,32 @@ let vim_markdown_preview_browser    = 'Google Chrome'
 " let vim_markdown_preview_hotkey     = '<C-m>'
 let vim_markdown_preview_toggle     = 1
 
+" Vim Prettier
+nmap <Leader>pr <Plug>(Prettier)
+let g:prettier#autoformat = 0
+let g:prettier#config#print_width = 100
+let g:prettier#config#tab_width = 2
+let g:prettier#config#use_tabs = 'false'
+let g:prettier#config#semi = 'true'
+let g:prettier#config#single_quote = 'false'
+autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue,*.yaml,*.html Prettier
+
+" React preferences
+hi tsxTagName guifg=#E06C75
+hi tsxCloseString guifg=#F99575
+hi tsxCloseTag guifg=#F99575
+hi tsxAttributeBraces guifg=#F99575
+hi tsxEqual guifg=#F99575
+hi tsxAttrib guifg=#F8BD7F cterm=italic
+hi tsxTypeBraces guifg=#999999
+hi tsxTypes guifg=#666666
+
+let g:user_emmet_settings = {
+  \  'javascript.jsx' : {
+    \      'extends' : 'jsx',
+    \  },
+  \}
+
 " My preferences
 colorscheme lucius
 set relativenumber
@@ -170,6 +223,7 @@ set hlsearch
 set backspace=2
 set foldmethod=indent
 set foldlevel=20
+set nowrap
 
 " color column settings
 highlight ColorColumn ctermbg=235
@@ -183,16 +237,12 @@ let g:indent_guides_enable_on_vim_startup  = 1
 autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd    ctermbg=236
 autocmd VimEnter,Colorscheme * :hi IndentGuidesEven   ctermbg=235
 
-" Javacomplete
-autocmd FileType java setlocal omnifunc=javacomplete#Complete
-nmap <F4> <Plug>(JavaComplete-Imports-AddSmart)
-imap <F4> <Plug>(JavaComplete-Imports-AddSmart)
-nmap <F6> <Plug>(JavaComplete-Imports-AddMissing)
-imap <F6> <Plug>(JavaComplete-Imports-AddMissing)
-nmap <F7> <Plug>(JavaComplete-Imports-RemoveUnused)
-imap <F7> <Plug>(JavaComplete-Imports-RemoveUnused)
-" let g:JavaComplete_LibsPath
-" let g:JavaComplete_SourcesPath
+" Powerline
+set t_Co=256
+let g:Powerline_symbols = "fancy"
 
+" ctrlp (fuzzy find)
+let g:ctrlp_max_files=0
+let g:ctrlp_clear_cache_on_exit = 0
 
 " let NERDTreeShowHidden=1

@@ -37,8 +37,6 @@ Plugin 'peitalin/vim-jsx-typescript'
 Plugin 'mattn/webapi-vim'
 Plugin 'mattn/emmet-vim'
 Plugin 'Shougo/vimproc.vim'
-" Plugin 'Shougo/vimshell.vim'
-" Plugin 'sebdah/vim-delve'
 Plugin 'Quramy/tsuquyomi'
 Plugin 'prettier/vim-prettier', { 'do': 'yarn install' }
 
@@ -60,6 +58,7 @@ execute pathogen#infect()
 
 
 " Homemade Shortcuts
+map <leader>l :e #<CR>
 " add a require 'pry' and binding.pry at current cursor location
 map <leader>bp :s/\(^.*\n\)/require 'pry'\rbinding.pry\r\1/g<cr>:noh<cr>3k==2.2j
 " clean up require 'pry' and binding.pry in file mapped to undo-binding-pry ubp

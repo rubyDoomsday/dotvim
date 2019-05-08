@@ -13,6 +13,7 @@ call vundle#begin()
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
 " Keep Plugin commands between vundle#begin/end.
+" General Plugins
 Plugin 'mileszs/ack.vim'
 Plugin 'kien/ctrlp.vim'
 Plugin 'Raimondi/delimitMate'
@@ -24,12 +25,19 @@ Plugin 'nathanaelkane/vim-indent-guides'
 Plugin 'honza/vim-snippets'
 Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-fugitive'
+Plugin 'Lokaltog/vim-powerline'
+
+" Markdown Plugins
 Plugin 'plasticboy/vim-markdown'
 Plugin 'JamshedVesuna/vim-markdown-preview'
+
+" Go Plugins
 Plugin 'nsf/gocode', {'rtp': 'vim/'}
-Plugin 'Lokaltog/vim-powerline'
 Plugin 'SirVer/ultisnips'
 Plugin 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
+
+" Kotlin plugins
+Plugin 'udalov/kotlin-vim'
 
 " React plugins
 Plugin 'leafgarland/typescript-vim'

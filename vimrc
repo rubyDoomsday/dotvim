@@ -28,8 +28,8 @@ Plugin 'tpope/vim-fugitive'
 Plugin 'Lokaltog/vim-powerline'
 
 " Markdown Plugins
-Plugin 'plasticboy/vim-markdown'
 Plugin 'JamshedVesuna/vim-markdown-preview'
+Plugin 'gabrielelana/vim-markdown'
 
 " Go Plugins
 Plugin 'nsf/gocode', {'rtp': 'vim/'}
@@ -43,6 +43,8 @@ Plugin 'udalov/kotlin-vim'
 Plugin 'leafgarland/typescript-vim'
 Plugin 'peitalin/vim-jsx-typescript'
 Plugin 'mattn/webapi-vim'
+Plugin 'pangloss/vim-javascript'
+Plugin 'mxw/vim-jsx'
 Plugin 'mattn/emmet-vim'
 Plugin 'Shougo/vimproc.vim'
 Plugin 'Quramy/tsuquyomi'
@@ -76,7 +78,7 @@ map <leader>rbp :s/\(^.*\n\)/require 'pry-remote'\rbinding.remote_pry\r\1/g<cr>:
 " clean up require 'pry' and binding.pry in file mapped to undo-binding-pry ubp
 map <leader>urbp :g/require 'pry-remote'\_s\+binding.remote_pry\_s\+/,+1d<cr>
 " search for word under cursor with Silver Searcher
-map <leader>sw :Ack --smart-case -w<space>
+map <leader>sw :Ack --smart-case -w <C-r>=expand('<cword>')<CR>
 " search for word under cursor with Silver Searcher (Ruby)
 map <leader>swr :Ack --smart-case --ruby -w <C-r>=expand('<cword>')<CR>
 " replace word under cusor

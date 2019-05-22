@@ -25,7 +25,9 @@ Plugin 'nathanaelkane/vim-indent-guides'
 Plugin 'honza/vim-snippets'
 Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-fugitive'
+Plugin 'tpope/vim-rhubarb'
 Plugin 'Lokaltog/vim-powerline'
+Plugin 'christoomey/vim-tmux-navigator'
 
 " Markdown Plugins
 Plugin 'JamshedVesuna/vim-markdown-preview'

@@ -28,6 +28,7 @@ Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-rhubarb'
 Plugin 'Lokaltog/vim-powerline'
 Plugin 'christoomey/vim-tmux-navigator'
+Plugin 'tpope/vim-obsession'
 
 " Markdown Plugins
 Plugin 'JamshedVesuna/vim-markdown-preview'
@@ -36,7 +37,7 @@ Plugin 'gabrielelana/vim-markdown'
 " Go Plugins
 Plugin 'nsf/gocode', {'rtp': 'vim/'}
 Plugin 'SirVer/ultisnips'
-Plugin 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
+Plugin 'fatih/vim-go'
 
 " Kotlin plugins
 Plugin 'udalov/kotlin-vim'
@@ -70,15 +71,11 @@ execute pathogen#infect()
 
 
 " Homemade Shortcuts
-map <leader>l :e #<CR>
-" add a require 'pry' and binding.pry at current cursor location
-map <leader>bp :s/\(^.*\n\)/require 'pry'\rbinding.pry\r\1/g<cr>:noh<cr>3k==2.2j
-" clean up require 'pry' and binding.pry in file mapped to undo-binding-pry ubp
-map <leader>ubp :g/require 'pry'\_s\+binding.pry\_s\+/,+1d<cr>
-" add a require 'remote-pry' and binding.pry at current cursor location
-map <leader>rbp :s/\(^.*\n\)/require 'pry-remote'\rbinding.remote_pry\r\1/g<cr>:noh<cr>3k==2.2j
-" clean up require 'pry' and binding.pry in file mapped to undo-binding-pry ubp
-map <leader>urbp :g/require 'pry-remote'\_s\+binding.remote_pry\_s\+/,+1d<cr>
+" wrap text
+map <leader>w :set wrap<CR>
+map <leader>nw :set nowrap<CR>
+" toggle view to last file
+map <leader>[ :e #<CR>
 " search for word under cursor with Silver Searcher
 map <leader>sw :Ack --smart-case -w <C-r>=expand('<cword>')<CR>
 " search for word under cursor with Silver Searcher (Ruby)
@@ -110,10 +107,12 @@ map <leader>usp :set nospell<CR>
 " zg = add good word
 " z= = suggest correction
 " zw = add bad word
-" Tabulariz only the first instance of :
+" Tabularize only the first instance of :
 map <leader>-: :Tabularize /^[^:]*:\zs<cr>
 map <leader>-= :Tabularize /^[^=]*<cr>
 map <leader>-, :Tabularize /^[^,]*,\zs<cr>
+" zoom current buffer to entire screen
+map <C-w>0 :vertical resize +100<cr>:resize +100<cr>
 if &diff
   " vimdiff shortcuts
   map <leader><left> :diffget LOCAL <bar> :diffu<cr>
@@ -129,15 +128,39 @@ else
   map <leader><down> ]s
 endif
 
-" rspec shortcuts
+" Go (vim-go) Type Shortcuts
+" toggle debugging breakpoint
+autocmd FileType go nnoremap <buffer> <leader>bp :GoDebugBreakpoint<CR>
+" toggle debugging breakpoint
+autocmd FileType go nnoremap <buffer> <leader>ubp :GoDebugStop<CR>
+" debug continue
+autocmd FileType go nnoremap <buffer> <leader>tc :GoDebugContinue<CR>
+" run current test file (DEBUG)
+autocmd FileType go nnoremap <buffer> <leader>td :GoDebugTest<CR>
+" run current test file
+autocmd FileType go nnoremap <buffer> <leader>t :GoTest<CR>
+" run current test file from current line
+autocmd FileType go nnoremap <buffer> <leader>tr :GoTestFunc<CR>
+" build interface
+autocmd FileType go nnoremap <buffer> <leader>int :GoImpl<CR>
+
+" Rails Type Shortcuts
+" insert debugging breakpoint
+autocmd FileType ruby nnoremap <buffer> <leader>bp :s/\(^.*\n\)/require 'pry'\rbinding.pry\r\1/g<cr>:noh<cr>3k==2.2j
+" clean up require 'pry' and binding.pry in file mapped to undo-binding-pry ubp
+autocmd FileType ruby nnoremap <buffer> <leader>ubp :g/require 'pry'\_s\+binding.pry\_s\+/,+1d<cr>
+" add a require 'remote-pry' and binding.pry at current cursor location
+autocmd FileType ruby nnoremap <buffer> <leader>rbp :s/\(^.*\n\)/require 'pry-remote'\rbinding.remote_pry\r\1/g<cr>:noh<cr>3k==2.2j
+" clean up require 'pry' and binding.pry in file mapped to undo-binding-pry ubp
+autocmd FileType ruby nnoremap <buffer> <leader>urbp :g/require 'pry-remote'\_s\+binding.remote_pry\_s\+/,+1d<cr>
 " run current rspec file
-map <leader>t :wa<cr>:!bundle exec rspec %:p<CR>
+autocmd FileType ruby nnoremap <buffer> <leader>t :wa<cr>:!bundle exec rspec %:p<CR>
 " run current rspec file from current line
-map <leader>tr :wa<cr>:call RunSpecAtLine("!bundle exec rspec -fd ")<CR>
+autocmd FileType ruby nnoremap <buffer> <leader>tr :wa<cr>:call RunSpecAtLine("!bundle exec rspec -fd ")<CR>
 " run current rspec file
-map <leader>st :wa<cr>:call RunSpecForFile("!script/test ")<CR>
+autocmd FileType ruby nnoremap <buffer> <leader>st :wa<cr>:call RunSpecForFile("!script/test ")<CR>
 " run current rspec file from current line
-map <leader>str :wa<cr>:call RunSpecAtLine("!script/test ")<CR>
+autocmd FileType ruby nnoremap <buffer> <leader>str :wa<cr>:call RunSpecAtLine("!script/test ")<CR>
 " builds rspec command from current line
 function! RunSpecAtLine(specCommand)
   let currentFile = @%
@@ -189,6 +212,10 @@ let g:tsuquyomi_disable_quickfix = 1
 let g:go_highlight_functions  = 1
 let g:go_highlight_methods    = 1
 let g:go_highlight_types      = 1
+" let g:go_highlight_fields     = 1
+let g:go_highlight_functions  = 1
+let g:go_highlight_function_calls = 1
+" let g:go_metalinter_autosave = 1
 let g:go_fmt_command = "goimports"
 
 " Vim-Markdown preferences
@@ -206,6 +233,8 @@ let g:prettier#config#tab_width = 2
 let g:prettier#config#use_tabs = 'false'
 let g:prettier#config#semi = 'true'
 let g:prettier#config#single_quote = 'false'
+let g:prettier#config#trailing_comma = 'all'
+let g:prettier#config#arrow_parens = 'always'
 autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue,*.yaml,*.html Prettier
 
 " React preferences

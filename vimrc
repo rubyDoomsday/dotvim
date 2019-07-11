@@ -177,6 +177,7 @@ autocmd BufWritePre * :%s/\s\+$//e
 
 syntax on
 
+
 "" Rubocop Settings
 let g:vimrubocop_config = '/Users/rebeccachapin/HealthBase/.rubocop.yml'
 let g:vimrubocop_keymap = 0
@@ -219,6 +220,8 @@ let g:go_highlight_function_calls = 1
 let g:go_fmt_command = "goimports"
 
 " Vim-Markdown preferences
+autocmd FileType markdown setlocal textwidth=100
+
 let markdown_enable_spell_checking  = 0
 let vim_markdown_preview_github     = 1
 let vim_markdown_preview_browser    = 'Google Chrome'

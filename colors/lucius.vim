@@ -54,10 +54,10 @@ if &background == "dark"
 
     " == Identifiers ==
     " any variable name
-    hi Identifier       guifg=#86c6b6                                   gui=none 
+    hi Identifier       guifg=#86c6b6                                   gui=none
     hi Identifier       ctermfg=116                                     cterm=none
     " function, method, class
-    hi Function         guifg=#86c6b6                                   gui=none 
+    hi Function         guifg=#86c6b6                                   gui=none
     hi Function         ctermfg=116                                     cterm=none
 
 
@@ -193,7 +193,7 @@ if &background == "dark"
     hi IncSearch        ctermfg=87                                      cterm=reverse
     " hlsearch (last search pattern), also used for quickfix
     hi Search                                    guibg=#ffaa33          gui=none
-    hi Search                                    ctermbg=214            cterm=none
+    hi Search                                    ctermbg=053            cterm=none
 
 
     " == UI ==
@@ -305,7 +305,7 @@ if &background == "dark"
     hi VimwikiHeader2   ctermfg=110                                     cterm=none
     hi VimwikiHeader3   guifg=#b3d38c                                   gui=bold
     hi VimwikiHeader3   ctermfg=150                                     cterm=none
-    hi VimwikiHeader4   guifg=#86c6b6                                   gui=bold 
+    hi VimwikiHeader4   guifg=#86c6b6                                   gui=bold
     hi VimwikiHeader4   ctermfg=116                                     cterm=none
     hi VimwikiHeader5   guifg=#b0a0c0                                   gui=bold
     hi VimwikiHeader5   ctermfg=182                                     cterm=none
@@ -350,10 +350,10 @@ elseif &background == 'light'
 
     " == Identifiers ==
     " any variable name
-    hi Identifier       guifg=#108080                                   gui=none 
+    hi Identifier       guifg=#108080                                   gui=none
     hi Identifier       ctermfg=30                                      cterm=none
     " function, method, class
-    hi Function         guifg=#108080                                   gui=none 
+    hi Function         guifg=#108080                                   gui=none
     hi Function         ctermfg=30                                      cterm=none
 
 
@@ -434,7 +434,7 @@ elseif &background == 'light'
     hi Debug            guifg=#8040a0           guibg=NONE              gui=none
     hi Debug            ctermfg=97              ctermbg=NONE            cterm=none
 
-            
+
     " == Text Markup ==
     " text that stands out, html links
     hi Underlined       guifg=fg                                        gui=underline
@@ -468,7 +468,7 @@ elseif &background == 'light'
     " == Text Selection ==
     " character under the cursor
     hi Cursor           guifg=bg                guibg=#406090
-    hi Cursor           ctermfg=bg              ctermbg=4  
+    hi Cursor           ctermfg=bg              ctermbg=4
     " like cursor, but used when in IME mode
     hi CursorIM         guifg=bg                guibg=#96cdcd
     hi CursorIM         ctermfg=bg              ctermbg=116
@@ -590,7 +590,7 @@ elseif &background == 'light'
     hi WildMenu         guifg=#2060e0           guibg=#b0c0d0           gui=bold,underline
     hi WildMenu         ctermfg=26              ctermbg=146             cterm=bold
     " color column highlighting
-    hi ColorColumn      guifg=NONE              guibg=#f0e0d0           gui=none
+    hi ColorColumn      guifg=NONE              guibg=#5f0087           gui=none
     hi ColorColumn      ctermfg=NONE            ctermbg=224             cterm=none
 
 
@@ -601,7 +601,7 @@ elseif &background == 'light'
     "hi VimwikiHeader2   ctermfg=110                                     cterm=none
     "hi VimwikiHeader3   guifg=#b3d38c                                   gui=bold
     "hi VimwikiHeader3   ctermfg=150                                     cterm=none
-    "hi VimwikiHeader4   guifg=#86c6b6                                   gui=bold 
+    "hi VimwikiHeader4   guifg=#86c6b6                                   gui=bold
     "hi VimwikiHeader4   ctermfg=116                                     cterm=none
     "hi VimwikiHeader5   guifg=#b0a0c0                                   gui=bold
     "hi VimwikiHeader5   ctermfg=182                                     cterm=none

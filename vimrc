@@ -29,6 +29,7 @@ Plugin 'tpope/vim-rhubarb'
 Plugin 'Lokaltog/vim-powerline'
 Plugin 'christoomey/vim-tmux-navigator'
 Plugin 'tpope/vim-obsession'
+Plugin 'vim-syntastic/syntastic'
 
 " Markdown Plugins
 Plugin 'JamshedVesuna/vim-markdown-preview'
@@ -52,6 +53,9 @@ Plugin 'mattn/emmet-vim'
 Plugin 'Shougo/vimproc.vim'
 Plugin 'Quramy/tsuquyomi'
 Plugin 'prettier/vim-prettier', { 'do': 'yarn install' }
+
+" Rails plugins
+Plugin 'tpope/vim-rails'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -108,9 +112,10 @@ map <leader>usp :set nospell<CR>
 " z= = suggest correction
 " zw = add bad word
 " Tabularize only the first instance of :
-map <leader>-: :Tabularize /^[^:]*:\zs<cr>
-map <leader>-= :Tabularize /^[^=]*<cr>
-map <leader>-, :Tabularize /^[^,]*,\zs<cr>
+map <leader>-: :Tabularize /^[^:]*:<cr>
+map <leader>-= :Tabularize /^[^=]*/l0<cr>
+map <leader>-, :Tabularize /^[^,]*,<cr>
+
 " zoom current buffer to entire screen
 map <C-w>0 :vertical resize +100<cr>:resize +100<cr>
 if &diff
@@ -179,7 +184,6 @@ syntax on
 
 
 "" Rubocop Settings
-let g:vimrubocop_config = '/Users/rebeccachapin/HealthBase/.rubocop.yml'
 let g:vimrubocop_keymap = 0
 
 "" Spellchecker (becuase me flail ingrish)
@@ -224,9 +228,11 @@ autocmd FileType markdown setlocal textwidth=100
 
 let markdown_enable_spell_checking  = 0
 let vim_markdown_preview_github     = 1
+" let vim_markdown_preview_pandoc     = 1
 let vim_markdown_preview_browser    = 'Google Chrome'
-" let vim_markdown_preview_hotkey     = '<C-m>'
-let vim_markdown_preview_toggle     = 1
+let vim_markdown_preview_toggle     = 2
+let vim_markdown_preview_temp_file  = 1
+
 
 " Vim Prettier
 nmap <Leader>pr <Plug>(Prettier)
@@ -271,6 +277,7 @@ set nowrap
 " color column settings
 highlight ColorColumn ctermbg=235
 let &colorcolumn="81,".join(range(101,999),",")
+" let g:solarized_termcolors=256
 
 " Settings for vim-indent-guides
 let g:indent_guides_auto_colors            = 0

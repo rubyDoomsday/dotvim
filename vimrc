@@ -32,8 +32,8 @@ Plugin 'tpope/vim-obsession'
 Plugin 'vim-syntastic/syntastic'
 
 " Markdown Plugins
-Plugin 'JamshedVesuna/vim-markdown-preview'
 Plugin 'gabrielelana/vim-markdown'
+Plugin 'iamcco/markdown-preview.vim'
 
 " Go Plugins
 Plugin 'nsf/gocode', {'rtp': 'vim/'}
@@ -56,6 +56,10 @@ Plugin 'prettier/vim-prettier', { 'do': 'yarn install' }
 
 " Rails plugins
 Plugin 'tpope/vim-rails'
+
+" Git Plugins
+Plugin 'junkblocker/patchreview-vim'
+Plugin 'codegram/vim-codereview'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -194,6 +198,7 @@ autocmd InsertEnter * :set number
 autocmd InsertLeave * :set relativenumber
 
 "" Syntastic Settings
+set statusline+=%{FugitiveStatusline()}
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
@@ -225,14 +230,14 @@ let g:go_fmt_command = "goimports"
 
 " Vim-Markdown preferences
 autocmd FileType markdown setlocal textwidth=100
-
 let markdown_enable_spell_checking  = 0
-let vim_markdown_preview_github     = 1
-" let vim_markdown_preview_pandoc     = 1
-let vim_markdown_preview_browser    = 'Google Chrome'
-let vim_markdown_preview_toggle     = 2
-let vim_markdown_preview_temp_file  = 1
 
+" Markdown-Preview preferences
+autocmd FileType markdown nnoremap <buffer> <C-m> :MarkdownPreview<CR>
+autocmd FileType markdown nnoremap <buffer> <C-n> :MarkdownPreview<CR>
+let g:mkdp_browserfunc              = 'MKDP_browserfunc_default'
+let g:mkdp_auto_start               = 0 " 0 default 1 autostart entering buffer
+let g:mkdp_auto_open                = 1 " default 0 1 auto start editing md file
 
 " Vim Prettier
 nmap <Leader>pr <Plug>(Prettier)

@@ -237,7 +237,7 @@ autocmd FileType markdown nnoremap <buffer> <C-m> :MarkdownPreview<CR>
 autocmd FileType markdown nnoremap <buffer> <C-n> :MarkdownPreview<CR>
 let g:mkdp_browserfunc              = 'MKDP_browserfunc_default'
 let g:mkdp_auto_start               = 0 " 0 default 1 autostart entering buffer
-let g:mkdp_auto_open                = 1 " default 0 1 auto start editing md file
+let g:mkdp_auto_open                = 0 " default 0 1 auto start editing md file
 
 " Vim Prettier
 nmap <Leader>pr <Plug>(Prettier)

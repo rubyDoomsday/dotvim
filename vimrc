@@ -189,9 +189,16 @@ syntax on
 
 "" Rubocop Settings
 let g:vimrubocop_keymap = 0
+let g:vimrubocop_rubocop_cmd = 'bundle exec rubocop '
 
 "" Spellchecker (becuase me flail ingrish)
-"set spell spelllang=en_us
+" Spell-check Markdown files and Git Commit Messages
+autocmd FileType markdown setlocal spell
+autocmd FileType gitcommit setlocal spell
+" Enable dictionary auto-completion in Markdown files and Git Commit Messages
+autocmd FileType markdown setlocal complete+=kspell
+autocmd FileType gitcommit setlocal complete+=kspell
+
 
 "" Autoswitch abs/rel number scheme
 autocmd InsertEnter * :set number
@@ -229,7 +236,7 @@ let g:go_highlight_function_calls = 1
 let g:go_fmt_command = "goimports"
 
 " Vim-Markdown preferences
-autocmd FileType markdown setlocal textwidth=100
+autocmd FileType markdown setlocal textwidth=140
 let markdown_enable_spell_checking  = 0
 
 " Markdown-Preview preferences
@@ -249,7 +256,7 @@ let g:prettier#config#semi = 'true'
 let g:prettier#config#single_quote = 'false'
 let g:prettier#config#trailing_comma = 'all'
 let g:prettier#config#arrow_parens = 'always'
-autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue,*.yaml,*.html Prettier
+autocmd BufWritePre *.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue,*.yaml,*.html Prettier
 
 " React preferences
 hi tsxTagName guifg=#E06C75

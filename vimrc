@@ -33,7 +33,8 @@ Plugin 'vim-syntastic/syntastic'
 
 " Markdown Plugins
 Plugin 'gabrielelana/vim-markdown'
-Plugin 'iamcco/markdown-preview.vim'
+Plugin 'iamcco/markdown-preview.nvim'
+Plugin 'mzlogin/vim-markdown-toc'
 
 " Go Plugins
 Plugin 'nsf/gocode', {'rtp': 'vim/'}
@@ -242,9 +243,11 @@ let markdown_enable_spell_checking  = 0
 " Markdown-Preview preferences
 autocmd FileType markdown nnoremap <buffer> <C-m> :MarkdownPreview<CR>
 autocmd FileType markdown nnoremap <buffer> <C-n> :MarkdownPreview<CR>
-let g:mkdp_browserfunc              = 'MKDP_browserfunc_default'
 let g:mkdp_auto_start               = 0 " 0 default 1 autostart entering buffer
 let g:mkdp_auto_open                = 0 " default 0 1 auto start editing md file
+
+" Markdown TOC Preferences
+let g:vmt_fence_text = "Table Of Contents"
 
 " Vim Prettier
 nmap <Leader>pr <Plug>(Prettier)
@@ -286,6 +289,10 @@ set foldmethod=indent
 set foldlevel=20
 set nowrap
 
+" 4 space tabstops
+autocmd FileType sql setlocal shiftwidth=4 tabstop=4
+autocmd FileType python setlocal shiftwidth=4 tabstop=4
+
 " color column settings
 highlight ColorColumn ctermbg=235
 let &colorcolumn="81,".join(range(101,999),",")
@@ -308,4 +315,6 @@ let g:ctrlp_max_files=0
 let g:ctrlp_clear_cache_on_exit = 0
 
 " let NERDTreeShowHidden=1
-set term=screen-256color
+if !has('nvim')
+  set term=screen-256color
+endif

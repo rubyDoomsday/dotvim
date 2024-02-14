@@ -1,6 +1,6 @@
 Installation:
 
-    git clone --recursive git@github.com:rubyDoomsday/dotvim.gitt ~/.vim
+    git clone --recursive git@github.com:rubyDoomsday/dotvim.git ~/.vim
 
 Create symlinks:
 

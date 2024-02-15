@@ -24,7 +24,7 @@
   url = https://github.com/JamshedVesuna/vim-markdown-preview.git
 [submodule "bundle/vim-tmux-navigator"]
   path = bundle/vim-tmux-navigator
-  url = git@github.com:christoomey/vim-tmux-navigator.git
+  url = https://github.com/christoomey/vim-tmux-navigator.git
 [submodule "bundle/patchreview-vim"]
   path = bundle/patchreview-vim
   url = https://github.com/junkblocker/patchreview-vim.git
@@ -36,7 +36,7 @@
   url = https://github.com/codegram/vim-codereview.git
 [submodule "bundle/Vundle.vim"]
   path = bundle/Vundle.vim
-  url = git@github.com:VundleVim/Vundle.vim.git
+  url = https://github.com/VundleVim/Vundle.vim.git
 [submodule "bundle/delimitMate"]
   path = bundle/delimitMate
   url = https://github.com/Raimondi/delimitMate.git

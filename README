@@ -1,11 +1,10 @@
 Installation:
 
-    git clone --recursive git@github.com:rubyDoomsday/dotvim.git ~/.vim
+    git clone --recursive https://github.com/rubyDoomsday/dotvim.git ~/.vim
 
 Create symlinks:
 
     ln -s ~/.vim/vimrc ~/.vimrc
-    ln -s ~/.vim/gvimrc ~/.gvimrc
 
 Switch to the `~/.vim` directory, and fetch submodules:
 
